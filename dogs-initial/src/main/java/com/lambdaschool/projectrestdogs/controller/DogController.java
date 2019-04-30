@@ -3,6 +3,7 @@ package com.lambdaschool.projectrestdogs.controller;
 import com.lambdaschool.projectrestdogs.exceptions.ResourceNotFoundException;
 import com.lambdaschool.projectrestdogs.model.Dog;
 import com.lambdaschool.projectrestdogs.ProjectrestdogsApplication;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

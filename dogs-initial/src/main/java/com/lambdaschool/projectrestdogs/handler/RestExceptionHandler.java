@@ -2,6 +2,7 @@ package com.lambdaschool.projectrestdogs.handler;
 
 import com.lambdaschool.projectrestdogs.exceptions.ResourceNotFoundException;
 import com.lambdaschool.projectrestdogs.model.ErrorDetail;
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.http.HttpHeaders;
@@ -34,6 +35,18 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @Override
+    protected ResponseEntity<Object> handleTypeMismatch(TypeMismatchException exception, HttpHeaders headers, HttpStatus status, WebRequest request) {
+        ErrorDetail errorDetail = new ErrorDetail();
+        errorDetail.setTimestamp(new Date().getTime());
+        errorDetail.setStatus(HttpStatus.BAD_REQUEST.value());
+        errorDetail.setTitle(exception.getPropertyName());
+        errorDetail.setDetail(exception.getMessage());
+        errorDetail.setDeveloperMessage(request.getDescription(true));
+
+        return new ResponseEntity<>(errorDetail, null, HttpStatus.BAD_REQUEST);
+    }
+
+    @Override
     protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException exception, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ErrorDetail errorDetail = new ErrorDetail();
         errorDetail.setTimestamp(new Date().getTime());
@@ -44,4 +57,6 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
         return new ResponseEntity<>(errorDetail, null, HttpStatus.NOT_FOUND);
     }
+
+
 }
