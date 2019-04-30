@@ -1,6 +1,6 @@
 package com.lambdaschool.projectrestdogs;
 
-import com.lambdaschool.projectrestdogs.Dog;
+import com.lambdaschool.projectrestdogs.model.Dog;
 
 import java.util.ArrayList;
 
@@ -13,8 +13,8 @@ public class DogList
         dogList.add(new Dog("Springer", 50, false));
         dogList.add(new Dog("Bulldog", 50, true));
         dogList.add(new Dog("Collie", 50, false));
-        dogList.add(new Dog("Boston Terrie", 35, true));
-        dogList.add(new Dog("Corgie", 35, true));
+        dogList.add(new Dog("Boston Terrier", 35, true));
+        dogList.add(new Dog("Corgi", 35, true));
     }
 
     public Dog findDog(CheckDog tester)
