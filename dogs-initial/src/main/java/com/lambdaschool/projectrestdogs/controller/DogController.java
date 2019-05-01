@@ -43,7 +43,12 @@ public class DogController
     public ResponseEntity<?> getDogBreeds (@PathVariable String breed)
     {
         ArrayList<Dog> rtnDogs = ProjectrestdogsApplication.ourDogList.
-                findDogs(d -> d.getBreed().toUpperCase().equals(breed.toUpperCase()));
+                findDogs(d -> d.getBreed().toUpperCase().contains(breed.toUpperCase()));
+
+        if (rtnDogs.size() == 0) {
+            throw new ResourceNotFoundException("No dogs of breed " + breed + " found.");
+        }
+
         return new ResponseEntity<>(rtnDogs, HttpStatus.OK);
     }
 }
