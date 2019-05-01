@@ -13,19 +13,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 @RestController
 @RequestMapping("/dogs")
 public class DogController
 {
     private static final Logger logger = LoggerFactory.getLogger(DogController.class);
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss 'on' yyyy-MM-dd");
 
     // localhost:8080/dogs/dogs
     @GetMapping(value = "/dogs")
     public ResponseEntity<?> getAllDogs()
     {
-        logger.info("/dogs/dogs accessed.");
+        logger.info("/dogs/dogs accessed at " + simpleDateFormat.format(new Date()) + ".");
         return new ResponseEntity<>(ProjectrestdogsApplication.ourDogList.dogList, HttpStatus.OK);
     }
 
@@ -40,7 +43,7 @@ public class DogController
         }
 
         rtnDog = ProjectrestdogsApplication.ourDogList.findDog(d -> (d.getId() == id));
-        logger.info("/dogs/{} accessed.", id);
+        logger.info("/dogs/{} accessed at " + simpleDateFormat.format(new Date()) + ".", id);
         return new ResponseEntity<>(rtnDog, HttpStatus.OK);
 
     }
@@ -56,7 +59,7 @@ public class DogController
             throw new ResourceNotFoundException("No dogs of breed " + breed + " found.");
         }
 
-        logger.info("/dogs/breeds/{} accessed.", breed);
+        logger.info("/dogs/breeds/{} accessed at " + simpleDateFormat.format(new Date()) + ".", breed);
         return new ResponseEntity<>(rtnDogs, HttpStatus.OK);
     }
 }
