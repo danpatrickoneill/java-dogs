@@ -1,9 +1,21 @@
 package com.lambdaschool.projectrestdogs.model;
 
+
+import com.lambdaschool.projectrestdogs.ProjectrestdogsApplication;
+import com.lambdaschool.projectrestdogs.Services.MessageSender;
+import com.lambdaschool.projectrestdogs.controller.DogController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+
 import java.util.concurrent.atomic.AtomicLong;
 
 public class Dog
 {
+    private static final Logger logger = LoggerFactory.getLogger(DogController.class);
+
     private static final AtomicLong counter = new AtomicLong();
     private long id;
     private String breed;
@@ -16,6 +28,8 @@ public class Dog
         this.breed = breed;
         this.weight = weight;
         this.apartmentSuitable = apartmentSuitable;
+
+
     }
 
     public Dog(Dog toClone)
@@ -25,6 +39,7 @@ public class Dog
         this.weight = toClone.weight;
         this.apartmentSuitable = toClone.isApartmentSuitable();
     }
+
 
     public long getId()
     {
@@ -59,5 +74,15 @@ public class Dog
     public void setApartmentSuitable(boolean apartmentSuitable)
     {
         this.apartmentSuitable = apartmentSuitable;
+    }
+
+    @Override
+    public String toString() {
+        return "Dog{" +
+                "id=" + id +
+                ", breed='" + breed + '\'' +
+                ", weight=" + weight +
+                ", apartmentSuitable=" + apartmentSuitable +
+                '}';
     }
 }

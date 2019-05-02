@@ -56,9 +56,9 @@
         <appender-ref ref="STDOUT"/>
     </logger>
 
-    <logger name="com.lambdaschool.webemployees.EmpList" level="OFF">
-        <appender-ref ref="STDOUT"/>
-    </logger>
+    <!--    <logger name="com.lambdaschool.projectrestdogs" level="ALL">-->
+    <!--        <appender-ref ref="STDOUT"/>-->
+    <!--    </logger>-->
 
     <logger name="org.apache.catalina" level="OFF">
         <appender-ref ref="TOMCAT"/>
